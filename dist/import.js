@@ -79,6 +79,7 @@ module.exports = function (Model, ctx) {
             root: Model.app.datasources.container.settings.root,
             container: fileContainer.files.file[0].container,
             file: fileContainer.files.file[0].name,
+            fields: fileContainer.fields,
             ImportContainer: ImportContainerName,
             ImportLog: ImportLogName,
             relations: ctx.relations
@@ -115,6 +116,9 @@ module.exports = function (Model, ctx) {
             i++;
             (function (i) {
               const obj = { importId: options.file + ':' + i };
+              for (const key in options.fields) {
+                obj[key] = options.fields[key][0];
+              }
               for (const key in ctx.map) {
                 let isObj = (typeof ctx.map[key] === 'object');
                 let columnKey = isObj ? ctx.map[key].map : ctx.map[key];
