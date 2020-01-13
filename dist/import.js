@@ -93,7 +93,7 @@ module.exports = function (Model, ctx) {
    * Create import method (Not Available through REST)
    **/
   Model['import' + ctx.method] = function ImportMethod(container, file, options, finish) {
-    const filePath = __dirname + '/../../../' + options.root + '/' + options.container + '/' + options.file;
+    const filePath = options.root + '/' + options.container + '/' + options.file;
     const ImportContainer = Model.app.models[options.ImportContainer];
     const ImportLog = Model.app.models[options.ImportLog];
     async.waterfall([
